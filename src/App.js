@@ -8,6 +8,7 @@ import Login from './Components/Login/Login';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import { createContext, useState } from 'react';
 import CheckOut from './Components/CheckOut/CheckOut';
+import PlaceOrder from './Components/PlaceOrder/PlaceOrder';
 
 export const UserContext = createContext();
 
@@ -26,6 +27,9 @@ function App() {
                </Route>
                <PrivateRoute path="/admin">
                   <Admin />
+               </PrivateRoute>
+               <PrivateRoute path="/order">
+                  <PlaceOrder />
                </PrivateRoute>
                <Route path="/login">
                   <Login />

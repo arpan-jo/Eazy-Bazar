@@ -14,7 +14,7 @@ const Home = () => {
    }, []);
 
    return (
-      <div className="container-fluid">
+      <div className="container">
          <div className="row">
             {products.map(product => (
                <Products key={product._id} product={product}></Products>
