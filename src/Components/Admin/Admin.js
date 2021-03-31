@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './Admin.css';
@@ -7,6 +7,15 @@ import './Admin.css';
 const Admin = () => {
    const { register, handleSubmit } = useForm();
    const [image, setImage] = useState(null);
+
+   // const [products, setPorducts] = useState([]);
+   // useEffect(() => {
+   //    fetch('https://fast-badlands-83194.herokuapp.com/products')
+   //       .then(res => res.json())
+   //       .then(data => {
+   //          setPorducts(data);
+   //       });
+   // }, []);
 
    const onSubmit = data => {
       const productData = {

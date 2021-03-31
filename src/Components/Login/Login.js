@@ -31,8 +31,7 @@ const Login = () => {
          });
    };
 
-   console.log(loggedInUser);
-
+   // console.log(loggedInUser);
    return (
       <div>
          <h1>Sign in with google</h1>
