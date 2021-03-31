@@ -15,6 +15,7 @@ const Products = ({ product }) => {
                src={product.imageURL}
                alt="product images"
             />
+            <p>{product.name}</p>
             <div className="d-flex justify-content-around align-items-center">
                <h4>${product.price}</h4>
                <button onClick={() => handleProduct(product._id)} type="button">
