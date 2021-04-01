@@ -1,21 +1,27 @@
 import axios from 'axios';
+import './Admin.css';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import './Admin.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from 'react-router';
+import swal from 'sweetalert';
 
 const Admin = () => {
    const { register, handleSubmit } = useForm();
    const [image, setImage] = useState(null);
+   const history = useHistory();
 
-   // const [products, setPorducts] = useState([]);
-   // useEffect(() => {
-   //    fetch('https://fast-badlands-83194.herokuapp.com/products')
-   //       .then(res => res.json())
-   //       .then(data => {
-   //          setPorducts(data);
-   //       });
-   // }, []);
+   const [products, setPorducts] = useState([]);
+   useEffect(() => {
+      fetch('https://fast-badlands-83194.herokuapp.com/products')
+         .then(res => res.json())
+         .then(data => {
+            setPorducts(data);
+         });
+   }, []);
 
    const onSubmit = data => {
       const productData = {
@@ -51,15 +57,31 @@ const Admin = () => {
          });
    };
 
-   return (
-      <div className="products">
-         <div>
-            <p>Manage Product</p>
+   const deleteItem = id => {
+      console.log(id);
+      fetch('https://fast-badlands-83194.herokuapp.com/delete', {
+         method: 'DELETE',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(id),
+      });
+      swal('Alert!', 'You deleted the product!', 'warning');
+      history.push('/admin');
+   };
 
-            <input type="checkbox" />
-            <button>Delete</button>
+   const handleDelete = e => {
+      console.log('clicked');
+   };
+
+   return (
+      <div className="admin">
+         <div>
+            <h1>Manage Product</h1>
+
+            <button onClick={handleDelete}>Delete</button>
             <br />
-            <button>Update</button>
+            <button>Add Product</button>
          </div>
 
          <div>
@@ -80,9 +102,55 @@ const Admin = () => {
                      placeholder=""
                   />
                   <br />
-                  <input type="submit" />
+                  <button className="btn btn-success" type="submit">
+                     {' '}
+                     Add product
+                  </button>
                </form>
             }
+         </div>
+
+         <div>
+            {products.length > 0 ? (
+               <div className="d-flex justify-content-center">
+                  <div className="spinner-border d-none" role="status"></div>
+               </div>
+            ) : (
+               <div className="d-flex justify-content-center">
+                  <div className="spinner-border " role="status"></div>
+               </div>
+            )}
+            <Table bordered>
+               <thead>
+                  <tr>
+                     <th>Products</th>
+                     <th>Quantity</th>
+                     <th>Price</th>
+                     <th>Action</th>
+                  </tr>
+               </thead>
+               {products.map(product => (
+                  <tbody>
+                     <tr>
+                        <td>{product.name}</td>
+                        <td>{product.quantity}</td>
+                        <td>$ {product.price}.00</td>
+                        <td>
+                           <button className="btn bg-warning">
+                              <FontAwesomeIcon icon={faEdit} />
+                           </button>
+                           {'  '}
+                           <button
+                              onClick={() => deleteItem(product)}
+                              className="btn bg-danger"
+                           >
+                              <FontAwesomeIcon icon={faShoppingCart} />
+                           </button>
+                        </td>
+                     </tr>
+                  </tbody>
+               ))}
+            </Table>
          </div>
       </div>
    );

@@ -1,7 +1,5 @@
-/* .products {
+/* .admin {
    display: grid;
-   grid-template-columns: 1 1;
+   grid-template-columns: repeat(1, 1fr);
+   background-color: hotpink;
 } */
-.products-form {
-   background-color: aquamarine;
-}

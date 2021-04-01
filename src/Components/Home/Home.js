@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import Products from '../Products/Products';
 import './Home.css';
 
@@ -15,6 +16,15 @@ const Home = () => {
 
    return (
       <div className="container">
+         {products.length > 0 ? (
+            <div className="d-flex justify-content-center">
+               <div className="spinner-border d-none" role="status"></div>
+            </div>
+         ) : (
+            <div className="d-flex justify-content-center">
+               <div className="spinner-border " role="status"></div>
+            </div>
+         )}
          <div className="row">
             {products.map(product => (
                <Products key={product._id} product={product}></Products>

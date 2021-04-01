@@ -15,34 +15,39 @@ export const UserContext = createContext();
 function App() {
    const [loggedInUser, setLoggedInUser] = useState();
    return (
-      <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-         <Router>
-            <Header />
-            <Switch>
-               <Route exact path="/">
-                  <Home />
-               </Route>
-               <Route path="/home">
-                  <Home />
-               </Route>
-               <PrivateRoute path="/admin">
-                  <Admin />
-               </PrivateRoute>
-               <PrivateRoute path="/order">
-                  <PlaceOrder />
-               </PrivateRoute>
-               <Route path="/login">
-                  <Login />
-               </Route>
-               <PrivateRoute path="/product/:id">
-                  <CheckOut />
-               </PrivateRoute>
-               <Route path="*">
-                  <NoFound />
-               </Route>
-            </Switch>
-         </Router>
-      </UserContext.Provider>
+      <div className="home">
+         <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+            <Router>
+               <Header />
+               <Switch>
+                  <Route exact path="/">
+                     <Home />
+                  </Route>
+                  <Route path="/home">
+                     <Home />
+                  </Route>
+                  <Route path="/placeOrder">
+                     <PlaceOrder />
+                  </Route>
+                  <PrivateRoute path="/admin">
+                     <Admin />
+                  </PrivateRoute>
+                  <PrivateRoute path="/order">
+                     <PlaceOrder />
+                  </PrivateRoute>
+                  <Route path="/login">
+                     <Login />
+                  </Route>
+                  <PrivateRoute path="/product/:id">
+                     <CheckOut />
+                  </PrivateRoute>
+                  <Route path="*">
+                     <NoFound />
+                  </Route>
+               </Switch>
+            </Router>
+         </UserContext.Provider>
+      </div>
    );
 }
 

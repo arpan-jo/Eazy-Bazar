@@ -4,6 +4,8 @@ import firebaseConfig from '../../firebaseConfig';
 import 'firebase/auth';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 if (!firebase.apps.length) {
    firebase.initializeApp(firebaseConfig);
@@ -31,15 +33,30 @@ const Login = () => {
          });
    };
 
-   // console.log(loggedInUser);
+   const hanedleSignOut = () => {
+      history.push('/login');
+   };
+
    return (
       <div>
-         <h1>Sign in with google</h1>
-         <h3>Name: </h3>
-         {!loggedInUser ? (
-            <button onClick={handleGoogleSignIn}>sign in</button>
+         {loggedInUser ? (
+            <div>
+               <button
+                  className="btn btn-warning text-center"
+                  onClick={() => hanedleSignOut()}
+               >
+                  Sign Out
+               </button>
+            </div>
          ) : (
-            <button>Sign Out</button>
+            <div className="text-center">
+               <h1>Sign in with google</h1>
+               <button className="btn btn-warning" onClick={handleGoogleSignIn}>
+                  <FontAwesomeIcon icon={faGoogle} />
+                  {'    '}
+                  Sign In
+               </button>
+            </div>
          )}
       </div>
    );
