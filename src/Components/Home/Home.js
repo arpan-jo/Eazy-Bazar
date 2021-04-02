@@ -51,9 +51,8 @@ const Home = () => {
                )}
             </Carousel>
          </div>
-         <div className="container mb-5 mt-2">
+         <div className="container mb-5 mt-2 ">
             <h3 className="text-center">Our products</h3>
-
             <div className="row">
                {products.map(product => (
                   <Products key={product._id} product={product}></Products>

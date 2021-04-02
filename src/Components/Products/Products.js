@@ -10,8 +10,11 @@ const Products = ({ product }) => {
    };
 
    return (
-      <div className="card col-sm-4 mt-3 bg-light">
-         <div className="card-body text-center mx-2">
+      <div
+         className="card col-sm-4 mt-3 border-0"
+         style={{ backgroundColor: 'cornsilk' }}
+      >
+         <div className="card-body text-center mx-2 bg-light border border-2 rounded shadow">
             <img
                className="product-image"
                src={product.imageURL}

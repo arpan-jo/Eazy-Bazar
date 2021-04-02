@@ -3,6 +3,8 @@ import { Table } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
 import { UserContext } from '../../App';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSmile } from '@fortawesome/free-solid-svg-icons';
 
 const PlaceOrder = () => {
    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -24,7 +26,7 @@ const PlaceOrder = () => {
    };
 
    return (
-      <div className="p-4">
+      <div className="p-5">
          <h3 className="fw-bolder">Orders Summary</h3>
          <hr />
          {getOrder ? (
@@ -66,7 +68,7 @@ const PlaceOrder = () => {
             </Table>
          </div>
          <button onClick={confirmOrder} className="btn btn-success">
-            Confirm Order
+            Confirm Order <FontAwesomeIcon icon={faSmile} />
          </button>
       </div>
    );

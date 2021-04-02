@@ -4,6 +4,9 @@ import { UserContext } from '../../App';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Table } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarPlus } from '@fortawesome/free-regular-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Orders = props => {
    const [startDate, setStartDate] = useState(new Date());
@@ -29,8 +32,8 @@ const Orders = props => {
    };
 
    return (
-      <div>
-         <h1 className="mt-4">Checkout</h1>
+      <div className="p-5">
+         <h1 className="mt-4 fw-bold">Checkout:</h1>
          <Table striped bordered hover responsive>
             <thead>
                <tr>
@@ -55,17 +58,19 @@ const Orders = props => {
                </tr>
             </tbody>
          </Table>
+         <FontAwesomeIcon icon={faCalendarPlus} />
+         {'  '}
          <DatePicker
-            className="mt-4"
+            className="mt-2 border border-4"
             selected={startDate}
             onChange={date => setStartDate(date)}
          />{' '}
          <br />
          <button
-            className="mt-4 btn btn-success"
+            className="mt-3 btn btn-success"
             onClick={() => handleOrder(orderProduct)}
          >
-            Checkout
+            Checkout <FontAwesomeIcon icon={faCheckCircle} />
          </button>
       </div>
    );
