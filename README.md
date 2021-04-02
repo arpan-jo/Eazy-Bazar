@@ -1,1 +1,1 @@
-# [Live Site](https://eazy-bazar.web.app/)
+# f-vally-client
