@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './Header.css';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Form, FormControl, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +11,7 @@ const Header = () => {
    return (
       <>
          <Navbar
+            className="px-3 rounded"
             sticky="top"
             collapseOnSelect
             expand="lg"
@@ -18,13 +19,20 @@ const Header = () => {
             variant="dark"
          >
             <Navbar.Brand as={Link} to="/home">
-               <h1 className="logo">
+               <h3 className="logo">
                   Eazy-Bazar <FontAwesomeIcon icon={faShopify} />
-               </h1>
+               </h3>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                <Nav className="mr-auto"></Nav>
+               <Form inline>
+                  <FormControl
+                     type="text"
+                     placeholder="Search items (e.g. egg, milk)"
+                     className="mr-sm-2"
+                  />
+               </Form>
                <Nav>
                   <Nav.Link as={Link} to="/">
                      Home

@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-
+import { useHistory } from 'react-router';
+import swal from 'sweetalert';
 import { UserContext } from '../../App';
 
 const PlaceOrder = () => {
    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-
+   const history = useHistory();
    const [getOrders, setGetOrder] = useState([]);
    const getOrder = getOrders.length < 0 || getOrders;
-   const user = loggedInUser.email;
+
+   const user = loggedInUser && loggedInUser.email;
    useEffect(() => {
       fetch(`https://fast-badlands-83194.herokuapp.com/getOrder/${user}`)
          .then(res => res.json())
@@ -16,10 +18,14 @@ const PlaceOrder = () => {
    }, []);
 
    const { customer, email, date } = getOrder.length > 0 && getOrder[0];
-   console.log(getOrder);
+   const confirmOrder = () => {
+      swal('Good Job', 'You bought the products!', 'success');
+      history.push('/home');
+   };
+
    return (
       <div className="p-4">
-         <h3>Your Order list:</h3>
+         <h3 className="fw-bolder">Orders Summary</h3>
          <hr />
          {getOrder ? (
             <div className="d-flex justify-content-center">
@@ -30,14 +36,14 @@ const PlaceOrder = () => {
                <div className="spinner-border " role="status"></div>
             </div>
          )}
-         <div className="text-center">
-            <h5>Customer Details</h5>
+         <div>
+            <h5 className="fw-bolder">Customer Details:-</h5>
             <p>Name: {customer}</p>
             <p>Email: {email}</p>
             <p>Order Date: {date}</p>
          </div>
          <div>
-            <h5>Order Details:</h5>
+            <h5 className="fw-bolder">Order Details:-</h5>
             <Table responsive>
                <thead>
                   <tr>
@@ -47,7 +53,7 @@ const PlaceOrder = () => {
                      <th>Price</th>
                   </tr>
                </thead>
-               {getOrder.map(product => (
+               {getOrders.map(product => (
                   <tbody>
                      <tr>
                         <td></td>
@@ -59,7 +65,9 @@ const PlaceOrder = () => {
                ))}
             </Table>
          </div>
-         <button className="btn btn-success">Confirm Order</button>
+         <button onClick={confirmOrder} className="btn btn-success">
+            Confirm Order
+         </button>
       </div>
    );
 };

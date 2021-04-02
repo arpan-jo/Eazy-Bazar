@@ -59,7 +59,8 @@ const Orders = props => {
             className="mt-4"
             selected={startDate}
             onChange={date => setStartDate(date)}
-         />
+         />{' '}
+         <br />
          <button
             className="mt-4 btn btn-success"
             onClick={() => handleOrder(orderProduct)}

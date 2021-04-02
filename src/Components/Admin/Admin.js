@@ -5,7 +5,12 @@ import { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faEdit } from '@fortawesome/free-solid-svg-icons';
+import {
+   faTrash,
+   faPlus,
+   faEdit,
+   faTasks,
+} from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
 
@@ -70,87 +75,109 @@ const Admin = () => {
       history.push('/admin');
    };
 
-   const handleDelete = e => {
-      console.log('clicked');
+   const handleAdd = () => {
+      document.getElementById('deleteTable').style.display = 'none';
+      document.getElementById('addForm').style.display = 'block';
+   };
+
+   const handleDelete = () => {
+      document.getElementById('addForm').style.display = 'none';
+      document.getElementById('deleteTable').style.display = 'block';
    };
 
    return (
-      <div className="admin">
-         <div>
-            <h1>Manage Product</h1>
-
-            <button onClick={handleDelete}>Delete</button>
-            <br />
-            <button>Add Product</button>
-         </div>
-
-         <div>
-            {
-               <form onSubmit={handleSubmit(onSubmit)}>
-                  <input type="text" name="name" ref={register} />
-                  <br />
-                  <input type="text" name="price" ref={register} />
-                  <br />
-                  <input type="text" name="weigth" ref={register} />
-                  <br />
-                  <input type="text" name="quantity" ref={register} />
-                  <br />
-                  <input
-                     type="file"
-                     name="quantity"
-                     onChange={imageUpload}
-                     placeholder=""
-                  />
-                  <br />
-                  <button className="btn btn-success" type="submit">
-                     {' '}
-                     Add product
-                  </button>
-               </form>
-            }
-         </div>
-
-         <div>
-            {products.length > 0 ? (
-               <div className="d-flex justify-content-center">
-                  <div className="spinner-border d-none" role="status"></div>
+      <div className="admin-body">
+         <div className="admin">
+            <div className="sidebar">
+               <h3 className="text-center mt-5 mb-3 text-bold text-white">
+                  <FontAwesomeIcon icon={faTasks} /> Manage Product
+               </h3>
+               <button onClick={handleDelete} className="btn btn-warning mx-5 ">
+                  <FontAwesomeIcon icon={faTrash} /> Delete Product
+               </button>
+               <br />
+               <br />
+               <button
+                  onClick={handleAdd}
+                  className="manage btn btn-warning mx-5"
+               >
+                  <FontAwesomeIcon icon={faPlus} /> Add Product
+               </button>
+            </div>
+            <div className="content">
+               {products.length > 0 ? (
+                  <div className="d-flex justify-content-center">
+                     <div className="spinner-border d-none" role="status"></div>
+                  </div>
+               ) : (
+                  <div className="d-flex justify-content-center">
+                     <div className="spinner-border " role="status"></div>
+                  </div>
+               )}
+               <div id="deleteTable">
+                  <h3 className="mt-3">Manage Product</h3>
+                  <Table bordered>
+                     <thead>
+                        <tr>
+                           <th>Products</th>
+                           <th>Quantity</th>
+                           <th>Price</th>
+                           <th>Action</th>
+                        </tr>
+                     </thead>
+                     {products.map(product => (
+                        <tbody>
+                           <tr>
+                              <td>{product.name}</td>
+                              <td>{product.quantity}</td>
+                              <td>$ {product.price}.00</td>
+                              <td>
+                                 <button className="btn bg-warning">
+                                    <FontAwesomeIcon icon={faEdit} />
+                                 </button>
+                                 {'  '}
+                                 <button
+                                    onClick={() => deleteItem(product)}
+                                    className="btn bg-danger"
+                                 >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                 </button>
+                              </td>
+                           </tr>
+                        </tbody>
+                     ))}
+                  </Table>
                </div>
-            ) : (
-               <div className="d-flex justify-content-center">
-                  <div className="spinner-border " role="status"></div>
+               <div id="addForm">
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                     <h3 className="mt-3">Manage Product</h3>
+                     <label htmlFor="name">Name:-</label>
+                     {'  '}
+                     <input type="text" name="name" ref={register} />
+                     <br />
+                     <label htmlFor="price">Price:-</label>
+                     {'  '}
+                     <input type="text" name="price" ref={register} />
+                     <br /> <label htmlFor="weigth">Weigth:-</label>
+                     {'  '}
+                     <input type="text" name="weigth" ref={register} />
+                     <br /> <label htmlFor="name">Quantity:-</label>
+                     {'  '}
+                     <input type="text" name="quantity" ref={register} />
+                     <br />
+                     <input
+                        type="file"
+                        name="quantity"
+                        onChange={imageUpload}
+                        placeholder=""
+                     />
+                     <br />
+                     <button className="btn btn-success mt-2" type="submit">
+                        Save to Database
+                     </button>
+                  </form>
                </div>
-            )}
-            <Table bordered>
-               <thead>
-                  <tr>
-                     <th>Products</th>
-                     <th>Quantity</th>
-                     <th>Price</th>
-                     <th>Action</th>
-                  </tr>
-               </thead>
-               {products.map(product => (
-                  <tbody>
-                     <tr>
-                        <td>{product.name}</td>
-                        <td>{product.quantity}</td>
-                        <td>$ {product.price}.00</td>
-                        <td>
-                           <button className="btn bg-warning">
-                              <FontAwesomeIcon icon={faEdit} />
-                           </button>
-                           {'  '}
-                           <button
-                              onClick={() => deleteItem(product)}
-                              className="btn bg-danger"
-                           >
-                              <FontAwesomeIcon icon={faShoppingCart} />
-                           </button>
-                        </td>
-                     </tr>
-                  </tbody>
-               ))}
-            </Table>
+            </div>
          </div>
       </div>
    );

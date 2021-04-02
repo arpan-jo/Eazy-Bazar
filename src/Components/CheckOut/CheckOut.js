@@ -14,8 +14,6 @@ const CheckOut = () => {
          });
    }, []);
 
-   console.log(orderProduct);
-
    return <div>{<Orders orderProduct={orderProduct}></Orders>}</div>;
 };
 

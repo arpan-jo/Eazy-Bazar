@@ -1,3 +1,18 @@
 .product-image {
    height: 200px;
 }
+.carousel {
+   font-weight: bolder;
+}
+.carousel-image {
+   border-radius: 20px;
+   height: 250px;
+   width: 40%;
+}
+@media only screen and (max-width: 600px) {
+   .carousel-image {
+      height: 250px;
+      width: 100%;
+      margin-bottom: 10px;
+   }
+}
