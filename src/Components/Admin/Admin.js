@@ -113,7 +113,7 @@ const Admin = () => {
                   </div>
                )}
                <div id="deleteTable">
-                  <h3 className="mt-3">Manage Product</h3>
+                  <h3 className="mt-3 fw-bold">Manage Product</h3>
                   <Table bordered>
                      <thead>
                         <tr>
@@ -148,33 +148,71 @@ const Admin = () => {
                </div>
                <div id="addForm">
                   <form onSubmit={handleSubmit(onSubmit)}>
-                     <h3 className="mt-3">Manage Product</h3>
-                     <label htmlFor="name">Name:-</label>
-                     {'  '}
-                     <input type="text" name="name" ref={register} />
-                     <br />
-                     <label htmlFor="price">Price:-</label>
-                     {'  '}
-                     <input type="text" name="price" ref={register} />
-                     <br /> <label htmlFor="weigth">Weigth:-</label>
-                     {'  '}
-                     <input type="text" name="weigth" ref={register} />
-                     <br /> <label htmlFor="name">Quantity:-</label>
-                     {'  '}
-                     <input type="text" name="quantity" ref={register} />
-                     <br />
-                     <input
-                        type="file"
-                        name="quantity"
-                        onChange={imageUpload}
-                        placeholder=""
-                     />
-                     <br />
-                     {image && (
-                        <button className="btn btn-success mt-2" type="submit">
-                           Save to Database
-                        </button>
-                     )}
+                     <table>
+                        <h3 className="mt-3 fw-bold">Manage Product</h3>
+                        <tr>
+                           <td>
+                              <label htmlFor="name">Name:</label>
+                           </td>
+                           <td>
+                              <input type="text" name="name" ref={register} />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <label htmlFor="price">Price:</label>
+                           </td>
+                           <td>
+                              <input type="text" name="price" ref={register} />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <label htmlFor="weigth">Weigth:</label>
+                           </td>
+                           <td>
+                              <input type="text" name="weigth" ref={register} />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <label htmlFor="name">Quantity:</label>
+                           </td>
+                           <td>
+                              <input
+                                 type="text"
+                                 name="quantity"
+                                 ref={register}
+                              />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <label htmlFor="Image">Image:</label>
+                           </td>
+                           <td>
+                              <input
+                                 type="file"
+                                 name="image"
+                                 onChange={imageUpload}
+                                 placeholder=""
+                              />
+                           </td>
+                        </tr>{' '}
+                        <tr>
+                           <td></td>
+                           <td>
+                              {image && (
+                                 <button
+                                    className="btn btn-success mt-2"
+                                    type="submit"
+                                 >
+                                    Save to Database
+                                 </button>
+                              )}
+                           </td>
+                        </tr>
+                     </table>
                   </form>
                </div>
             </div>
