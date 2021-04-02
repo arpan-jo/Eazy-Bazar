@@ -14,7 +14,7 @@ const Products = ({ product }) => {
          className="card col-sm-4 mt-3 border-0"
          style={{ backgroundColor: 'cornsilk' }}
       >
-         <div className="card-body text-center mx-2 bg-light border border-2 rounded shadow">
+         <div className="card-body text-center mx-2 bg-light rounded">
             <img
                className="product-image"
                src={product.imageURL}
