@@ -26,7 +26,7 @@ const Admin = () => {
          .then(data => {
             setPorducts(data);
          });
-   }, []);
+   }, [products]);
 
    const onSubmit = data => {
       const productData = {
@@ -36,7 +36,6 @@ const Admin = () => {
          quantity: data.quantity,
          imageURL: image,
       };
-      console.log(productData);
       fetch('https://fast-badlands-83194.herokuapp.com/addProducts', {
          // mode: 'no-cors',
          method: 'POST',
@@ -45,6 +44,7 @@ const Admin = () => {
          },
          body: JSON.stringify(productData),
       });
+      history.push('/admin');
    };
 
    const imageUpload = e => {
@@ -54,7 +54,6 @@ const Admin = () => {
       axios
          .post('https://api.imgbb.com/1/upload', formData)
          .then(res => {
-            console.log(res.data.data.display_url);
             setImage(res.data.data.display_url);
          })
          .catch(error => {
@@ -63,7 +62,6 @@ const Admin = () => {
    };
 
    const deleteItem = id => {
-      console.log(id);
       fetch('https://fast-badlands-83194.herokuapp.com/delete', {
          method: 'DELETE',
          headers: {
@@ -172,9 +170,11 @@ const Admin = () => {
                         placeholder=""
                      />
                      <br />
-                     <button className="btn btn-success mt-2" type="submit">
-                        Save to Database
-                     </button>
+                     {image && (
+                        <button className="btn btn-success mt-2" type="submit">
+                           Save to Database
+                        </button>
+                     )}
                   </form>
                </div>
             </div>
