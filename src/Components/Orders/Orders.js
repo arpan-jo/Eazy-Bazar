@@ -13,9 +13,13 @@ const Orders = props => {
    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
    const orderProduct = props.orderProduct;
    const history = useHistory();
+
    const handleOrder = data => {
+      const { name, quantity, price } = data;
       const checkOutData = {
-         ...data,
+         name,
+         quantity,
+         price,
          email: loggedInUser.email,
          customer: loggedInUser.displayName,
          date: startDate,
